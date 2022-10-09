@@ -1,0 +1,153 @@
+GITHUB LINK:
+
+https://github.com/Rathod-Vatsal/Java-1-Mam-.git
+
+CODES:
+
+1.
+class P4P1
+{
+    public static void main(String... args)
+    {
+        System.out.println("\nArray Index Out Of Bounds Exception");
+        try
+        {
+            int[] arr=new int[1];
+            System.out.println(arr[1]);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+        System.out.println("\nArithematic Exception");
+        try
+        {
+            System.out.println(1/0);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+        System.out.println("\nNull Pointer Exception");
+        try
+        {
+           String s=null;
+            System.out.println(s.length());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+     
+        System.out.println("\nArray Store Exception");
+        try
+        {
+            Number[] num = new Double[2];
+            num[0] = new Integer(4);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2.
+import java.util.*;
+
+class MyException extends Exception
+{
+    MyException(String s)
+    {
+        super(s);
+    }
+}
+class P4P2
+{
+    public static void main(String[] args)
+    {
+        try
+        {
+            Scanner sc=new Scanner(System.in);
+            int age=sc.nextInt();
+            if(age<18)
+            {
+                throw new MyException("You are not eligible for voting");
+            }
+            else
+            {
+                System.out.println("You may proceed to vote");
+            }
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+}
+
+
+
+
+
+
+
+3.
+class P4P3
+{
+    public static void main(String[] args)
+    {
+        try{
+            int a=1/0;
+           // int[] b=new int[1];
+           // b[1]=0;
+        }
+        catch(ArithmeticException e)
+        {
+            System.out.println(e);
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            System.out.println("Final block called");
+        }
+    }
+}
+
