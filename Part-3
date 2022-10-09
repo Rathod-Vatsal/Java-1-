@@ -1,0 +1,505 @@
+CODES:
+
+1.
+import java.util.*;
+
+abstract class GeometricObject
+{
+    String color;
+    boolean filled;
+    Date dateCreated;
+
+    protected GeometricObject()
+    {
+        color="White";
+        filled=false;
+        dateCreated=new Date();
+    }
+    protected GeometricObject(String color,boolean filled)
+    {
+        this.color=color;
+        this.filled=filled;
+    }
+
+    String getColor()
+    {
+        return this.color;
+    }    
+    void setColor(String color)
+    {
+        this.color=color;
+    }
+    boolean isFilled()
+    {
+        return this.filled;
+    }
+    void setFilled(boolean filled)
+    {
+        this.filled=filled;
+    }
+    Date getDateCreated()
+    {
+        return this.dateCreated;
+    }
+
+    abstract double GetArea();
+    abstract double GetPerimeter();
+
+}
+class Circle extends GeometricObject
+{
+    double radius;
+    Circle()
+    {
+        radius=1;
+    }
+    Circle(double radius)
+    {
+        this.radius=radius;
+    }
+
+    Circle(double radius,String color,boolean filled)
+    {
+        this.radius=radius;
+        this.color=color;
+        this.filled=filled;
+    }
+
+    public double getRadius()
+    {
+        return this.radius;
+    }
+
+    public void setRadius(double radius)
+    {
+        this.radius=radius;
+    }
+
+    public double getDiameter()
+    {
+        return 2*this.radius;
+    }
+
+    @Override
+    public double GetArea()
+    {
+        return 3.14*radius*radius;
+    }
+    @Override
+    public double GetPerimeter()
+    {
+        return 2*3.14*radius;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "\nCircle\nRadius : "+getRadius()+"\nColor : "+getColor()+"\nFilled : "+isFilled()+"\nArea : "+GetArea()+"\nPerimeter : "+GetPerimeter();
+    }
+}
+class Rectangle extends GeometricObject
+{
+    double width;
+    double height;
+
+    Rectangle()
+    {
+        width=1;
+        height=1;
+    }
+    Rectangle(double width,double height)
+    {
+        this.width=width;
+        this.height=height;
+    }
+
+    Rectangle(double width,double height,String color,boolean filled)
+    {
+        this.width=width;
+        this.height=height;
+        this.color=color;
+        this.filled=filled;
+    }
+
+    double getWidth()
+    {
+        return this.width;
+    }
+    void setWidth(double width)
+    {
+        this.width=width;
+    }
+     double getHeight()
+    {
+        return this.height;
+    }
+    void setHeight(double height)
+    {
+        this.height=height;
+    }
+
+    @Override
+    public double GetArea()
+    {
+        return width*height;
+    }
+
+    @Override
+    public double GetPerimeter()
+    {
+        return 2*(width+height);
+    }
+
+     @Override
+    public String toString()
+    {
+        return "\nRectangle\nWidth : "+getWidth()+"\nHeigth : "+getHeight()+"\nColor : "+getColor()+"\nFilled : "+isFilled()+"\nArea : "+GetArea()+"\nPerimeter : "+GetPerimeter();
+    }
+}
+
+class P3P1
+{
+    public static void main(String... args)
+    {
+        Circle C1=new Circle(2,"Red",true);
+        Rectangle R1=new Rectangle(17,10,"Blue",false);
+
+        System.out.println(C1);
+        System.out.println(R1);
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2.
+import java.util.*;
+interface IPrinter
+{
+    public abstract void Printer();
+}
+
+interface IScanner
+{
+   public abstract void Scanner();
+}
+class Concrete implements IPrinter,IScanner
+{
+    Concrete()
+    {
+        System.out.println("Concrete object created");
+    }
+   
+    @Override
+    public void Printer()
+    {
+        System.out.println("This is Printer");
+    }
+
+    @Override
+    public void Scanner()
+    {
+        System.out.println("This is Scanner");
+    }
+}
+class P3P2
+{
+    public static void main(String... args)
+    {
+        Concrete C1=new Concrete();
+        Concrete C2=new Concrete();
+        Concrete C3=new Concrete();
+        Concrete C4=new Concrete();
+        Concrete C5=new Concrete();
+
+        Vector<Concrete> vr=new Vector<Concrete>();
+        vr.add(C1);
+        vr.add(C2);
+        vr.add(C3);
+        vr.add(C4);
+        vr.add(C5);
+
+        System.out.println(vr);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.
+interface P
+{
+    int a=10;
+    abstract void showA();
+}
+interface P1 extends P
+{
+    int b=20;
+    void showB();
+}
+interface P2 extends P
+{
+    int c=30;
+    void showC();
+}
+interface P12 extends P1,P2
+{
+    int d=40;
+    void showD();
+}
+class Test implements P12
+{
+    @Override
+    public void showA()
+    {
+        System.out.println("A = "+a);
+    }
+
+    @Override
+    public void showB()
+    {
+        System.out.println("B = "+b);
+    }
+
+    @Override
+    public void showC()
+    {
+        System.out.println("C = "+c);
+    }
+   
+    @Override
+    public void showD()
+    {
+        System.out.println("D = "+d);
+    }
+}
+class P3P3
+{
+    public static void main(String... args)
+    {
+        Test T1=new Test();
+        T1.showA();
+        T1.showB();          
+        T1.showC();
+        T1.showD();
+       
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.
+class Parent
+{
+    String name="Parent";
+    String showDetails()
+    {
+        return this.name;
+    }
+}
+class Child extends Parent
+{
+    String name="Child";
+
+    //Overriding the method from parent class
+    @Override
+    String showDetails()
+    {
+        return this.name;
+    }
+}
+class P3P4
+{
+    public static void main(String... args)
+    {
+        Child C1=new Child();
+        System.out.println(C1.showDetails());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5.
+import package1.Package1MyClass;
+import package2.Package2MyClass;
+
+class P3P5
+{
+    public static void main(String... args)
+    {
+        Package1MyClass P1=new Package1MyClass();
+        P1.show();
+        Package2MyClass P2=new Package2MyClass();
+        P2.show();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6.
+import addition.Add;
+import divison.Divide;
+import subtraction.Subtract;
+import multiplication.Multiply;
+import java.util.*;
+
+class P3P6
+{
+    public static void main(String... args)
+    {
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter number 1 : ");
+        float num1=sc.nextFloat();
+        System.out.print("Enter number 2 : ");
+        float num2=sc.nextFloat();
+
+        Add A=new Add();
+        System.out.println("Addition : "+A.getAddition(num1,num2));
+
+        Subtract S=new Subtract();
+        System.out.println("Subtraction : "+S.getSubtraction(num1,num2));
+       
+        Multiply M=new Multiply();
+        System.out.println("Multiplication : "+M.getMultiplication(num1,num2));
+       
+        Divide D=new Divide();
+        System.out.println("Division : "+D.getDivision(num1,num2));
+    }
+}
+
+
+
+
+
+
+
+
+
+7.
+interface DefaultMethodInterface
+{
+   default void Show()
+   {
+        System.out.println("Default method called");
+   }
+}
+
+class P3P7 implements DefaultMethodInterface
+{
+    public static void main(String... args)
+    {
+        P3P7 Obj=new P3P7();
+        Obj.Show();
+    }
+}
+
