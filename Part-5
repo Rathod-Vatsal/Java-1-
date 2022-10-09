@@ -1,0 +1,423 @@
+GITHUB LINK:
+
+https://github.com/Rathod-Vatsal/Java-1-Mam-.git
+
+
+
+1.
+/*By 21CE116 Vatsal Rathod
+Question : WAP to show how to create a file with different mode and methods of File class to find
+path, directory etc. */
+
+import java.util.*;
+import java.io.*;
+
+class P5P1
+{
+    public static void main(String... args)
+    {
+
+        //Creating the file
+        try
+        {
+            File myObj=new File("Part5Practical1.txt");
+            if(myObj.createNewFile())
+            {
+                System.out.println("File created with name "+myObj.getName());
+            }  
+            else
+            {
+                System.out.println("File already exists");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        //Opening in writing mode
+        try
+        {
+            FileWriter myObj=new FileWriter("Part5Practical1.txt");
+            myObj.write("This is Part 5 Practical 5\nCreated by 21CE115 Kishan Rathod");
+            myObj.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        //Reading from the file
+        try
+        {
+            File myObj=new File("Part5Practical1.txt");
+            Scanner myReader = new Scanner(myObj);
+
+            while(myReader.hasNextLine())
+            {
+                String data=myReader.nextLine();
+                System.out.println(data);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        //Getting path of File and directory
+        try
+        {
+            File myObj=new File("Part5Practical1.txt");
+            String path = myObj.getAbsolutePath();
+            String directory=new File(path).getParent();
+            System.out.println("Path of file : "+path);
+            System.out.println("Directory : "+directory);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+}
+2.
+/*By 21CE116 Vatsal Rathod
+Question : When to use Character Stream over Byte Stream? When to use Byte Stream over Character
+Stream? Give example.
+Ans:Byte streams are used to perform input and output of 8-bit bytes.
+    Byte streams are useful when we want to read/write binary data.
+    Character stream is used to perform input and output operations of 16-bit Unicode.
+    Character streams are used to read/write characters.*/
+
+import java.io.*;
+ 
+// Main class
+public class P5P2
+    {
+    // Main driver method
+    public static void main(String[] args)
+        throws IOException
+    {
+ 
+        // Initially assigning null as we have not read
+        // anything
+        FileReader sourceStream = null;
+ 
+        // Try block to check for exceptions
+        try {
+ 
+            // Reading from file
+            sourceStream = new FileReader(
+                "Part5Practical2.txt");
+ 
+            // Reading sourcefile and writing content to
+            // target file character by character.
+ 
+            int temp;
+ 
+            // If there is content inside file
+            // than read
+            while ((temp = sourceStream.read()) != -1)
+                System.out.println((char)temp);
+           
+          // Display message for successful execution of program
+          System.out.print("Program successfully executed");
+        }
+ 
+        // finally block that executes for sure
+        // where we are closing file connections
+        // to avoid memory leakage
+        finally {
+ 
+            // Closing stream as no longer in use
+            if (sourceStream != null)
+                sourceStream.close();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.
+/*By 21CE116 Vatsal Rathod
+Question : Write a program to transfer data from one file to another file so that if the destination
+file does not exist, it is created */
+
+import java.io.*;
+import java.util.*;
+ 
+class P5P3
+{
+   
+    public static void copyContent(File a, File b)
+        throws Exception
+    {
+        FileInputStream in = new FileInputStream(a);
+        FileOutputStream out = new FileOutputStream(b);
+ 
+        try {
+ 
+            int n;
+ 
+            // read() function to read the
+            // byte of data
+            while ((n = in.read()) != -1) {
+                // write() function to write
+                // the byte of data
+                out.write(n);
+            }
+        }
+        finally {
+            if (in != null) {
+ 
+                // close() function to close the
+                // stream
+                in.close();
+            }
+            // close() function to close
+            // the stream
+            if (out != null) {
+                out.close();
+            }
+        }
+        System.out.println("File Copied");
+    }
+ 
+    public static void main(String[] args) throws Exception
+    {
+        Scanner sc = new Scanner(System.in);
+ 
+        // get the source file name
+        System.out.println(
+            "Enter the source filename from where you have to read/copy :");
+        String a = sc.nextLine();
+ 
+        // source file
+        File x = new File(a);
+ 
+        // get the destination file name
+        System.out.println(
+            "Enter the destination filename where you have to write/paste :");
+        String b = sc.nextLine();
+ 
+        // destination file
+        File y = new File(b);
+ 
+        // method called to copy the
+        // contents from x to y
+        copyContent(x, y);
+    }
+}
+
+
+
+
+
+
+
+
+4.
+/*By 21CE116 Vatsal Rathod
+Question : WAP to show use of character and byte stream. */
+
+import java.io.*;
+class P5P4
+{  
+    public static void main(String args[]) throws IOException
+    {        
+        FileInputStream in = null;
+        FileOutputStream out = null;
+
+        try
+        {
+            in = new FileInputStream("Part5Practical4Input.txt");
+            out = new FileOutputStream("Part5Practical4Output.txt");
+            int c;
+            while ((c = in.read()) != -1)
+            {
+                out.write(c);
+            }
+        }
+        finally
+        {
+            if (in != null)
+            {
+                in.close();
+            }
+            if (out != null)
+            {
+                out.close();
+            }
+        }
+    }
+}
+
+
+
+
+
+5.
+/*By 21CE116 Vatsal Rathod
+Question : Write a program to enter any 15 numbers from the user and store only even numbers in a file
+named “Even.txt”. And display the contents of this file on the console. */
+
+import java.io.*;
+import java.util.*;
+
+
+class P5P5
+{
+    public static void main(String... args) throws Exception
+    {
+        Scanner sc=new Scanner(System.in);
+        int[] arr=new int[15];
+        for(int i=0;i<15;i++)
+        {
+            System.out.println("Enter the "+(i+1)+" number : ");
+            arr[i]=sc.nextInt();
+        }
+
+        //Buffered Writer
+        FileWriter writer=new FileWriter("Part5Practical5Even.txt");
+        BufferedWriter buffer= new BufferedWriter(writer);
+
+        for(int i=0;i<15;i++)
+        {
+            if(arr[i]%2==0)
+            {
+                buffer.write(arr[i]+" ");
+            }
+        }
+        buffer.close();
+
+        //Buffered Reader
+        FileReader fr=new FileReader("Part5Practical5Even.txt");    
+        BufferedReader br=new BufferedReader(fr);    
+        int i;    
+        System.out.println("Reading the file : ");
+        while((i=br.read())!=-1)
+        {  
+            System.out.print((char)i);  
+        }  
+        br.close();    
+        fr.close();    
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6.
+/*By 21CE116 Vatsal Rathod
+Question :  WAP to demonstrate methods of wrapper class */
+
+
+class P5P6
+{  
+    public static void main(String args[])
+    {  
+        byte b=10;  
+        short s=20;  
+        int i=30;  
+        long l=40;  
+        float f=50.0F;  
+        double d=60.0D;  
+        char c='a';  
+        boolean b2=true;  
+ 
+        //Autoboxing: Converting primitives into objects  
+        Byte byteobj=b;  
+        Short shortobj=s;  
+        Integer intobj=i;  
+        Long longobj=l;  
+        Float floatobj=f;  
+        Double doubleobj=d;  
+        Character charobj=c;  
+        Boolean boolobj=b2;  
+ 
+        //Printing objects  
+        System.out.println("---Printing object values---");  
+        System.out.println("Byte object: "+byteobj);  
+        System.out.println("Short object: "+shortobj);  
+        System.out.println("Integer object: "+intobj);  
+        System.out.println("Long object: "+longobj);  
+        System.out.println("Float object: "+floatobj);  
+        System.out.println("Double object: "+doubleobj);  
+        System.out.println("Character object: "+charobj);  
+        System.out.println("Boolean object: "+boolobj);  
+
+        //Unboxing: Converting Objects to Primitives  
+        byte bytevalue=byteobj;  
+        short shortvalue=shortobj;  
+        int intvalue=intobj;  
+        long longvalue=longobj;  
+        float floatvalue=floatobj;  
+        double doublevalue=doubleobj;  
+        char charvalue=charobj;  
+        boolean boolvalue=boolobj;  
+
+        //Printing primitives  
+        System.out.println("---Printing primitive values---");  
+        System.out.println("byte value: "+bytevalue);  
+        System.out.println("short value: "+shortvalue);  
+        System.out.println("int value: "+intvalue);  
+        System.out.println("long value: "+longvalue);  
+        System.out.println("float value: "+floatvalue);  
+        System.out.println("double value: "+doublevalue);  
+        System.out.println("char value: "+charvalue);  
+        System.out.println("boolean value: "+boolvalue);  
+    }  
+}  
+
