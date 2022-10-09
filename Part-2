@@ -1,0 +1,701 @@
+Codes: 
+
+1.
+//BY 21CE116 VATSAL RATHOD
+/*Question :
+Design a class named Circle containing following attributes and behavior.
+• One double data field named radius. The default value is 1.
+• A no-argument constructor that creates a default circle.
+• A Single argument constructor that creates a Circle with the specified radius.
+• A method named getArea() that returns area of the Circle.
+• A method named getPerimeter() that returns perimeter of it. */
+
+class P2P1
+{
+    public static void main(String[]args)
+    {
+        //Creating a default Circle
+        Circle C1=new Circle();
+        System.out.println("Area of default circle : "+C1.getArea());
+        System.out.println("Perimeter of default circle : "+C1.getPerimeter());
+
+        //Creating a circle with specific radius
+        Circle C2=new Circle(17);
+        System.out.println("\nArea of circle 2 : "+C2.getArea());
+        System.out.println("Perimeter of circle 2 : "+C2.getPerimeter());
+    }
+}
+
+class Circle
+{
+    private double radius;
+
+    Circle()
+    {
+        radius=1;
+    }
+
+    Circle(double radius)
+    {
+        this.radius=radius;
+    }
+
+    double getArea()
+    {
+        return 3.14*radius*radius;
+    }
+   
+    double getPerimeter()
+    {
+        return 2*3.14*radius;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2.
+//BY 21CE116 VATSAL RATHOD
+/*Question :
+Design a class named Account that contains:
+• A private int data field named id for the account (default 0).
+• A private double data field named balance for the account (default 500₹).
+• A private double data field named annualInterestRate that stores the current
+interest rate (default 7%). Assume all accounts have the same interest rate.
+• A private Date data field named dateCreated that stores the date when the
+account was created.
+• A no-arg constructor that creates a default account.
+• A constructor that creates an account with the specified id and initial balance.
+• The accessor and mutator methods for id, balance, and annualInterestRate.
+• The accessor method for dateCreated.
+• A method named getMonthlyInterestRate() that returns the monthly interest rate.
+• A method named getMonthlyInterest() that returns the monthly interest.
+• A method named withdraw that withdraws a specified amount from the account.
+• A method named deposit that deposits a specified amount to the account. */
+
+import java.util.*;
+
+class P2P2
+{
+    public static void main(String[]args)
+    {
+        //Default Account
+        Account A1=new Account();
+        A1.getInfo();
+
+        //Setting pararmeters
+        A1.setId(1);                //Changed account number to 1
+        A1.setBalance(2000);        //Changed balance to 2000
+        A1.setAnnualInterestRate(.2);  //Changed account annual interest rate to 20%
+        A1.getInfo();
+
+
+
+
+    }
+}
+class Account
+{
+    private int id;
+    private double balance;
+    private double annualInterestRate;
+    private Date dateCreated;
+
+    Account()
+    {
+        id=0;
+        balance=500;
+        annualInterestRate=0.07;
+        dateCreated=new Date();
+    }
+    Account(int id,double balance)
+    {
+        this.id=id;
+        this.balance=balance;
+    }
+    void setId(int id)
+    {
+        this.id=id;
+    }
+    void setBalance(double balance)
+    {
+        this.balance=balance;
+    }
+    void setAnnualInterestRate(double annualInterestRate)
+    {
+        this.annualInterestRate=annualInterestRate;
+    }
+    int getId()
+    {
+        return id;
+    }
+    double getBalance()
+    {
+        return balance;
+    }
+    double getAnnualInterestRate()
+    {
+        return annualInterestRate;
+    }      
+    Date getDateCreated()                              
+    {
+        return dateCreated;
+    }
+    double getMonthlyInterestRate()
+    {
+        return annualInterestRate/12;
+    }
+    double getMonthlyInterest()
+    {
+        return balance*getAnnualInterestRate();
+    }
+    void withdraw(double MoneyWithdrawn)
+    {
+        balance=balance-MoneyWithdrawn;
+    }
+    void deposit(double MoneyDeposit)
+    {
+        balance=balance+MoneyDeposit;
+    }
+    void getInfo()        //Shows all the information
+    {
+        System.out.println("\nId : "+id);
+        System.out.println("Balance : "+balance);
+        System.out.println("Annual Interest Rate : "+annualInterestRate);
+        System.out.println("Date Created : "+dateCreated);
+        System.out.println("Montly Interest Rate : "+getMonthlyInterestRate());
+        System.out.println("Montly Interest : "+getMonthlyInterest());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.
+//BY 21CE116 VATSAL RATHOD
+/*Question :
+Use the Account class created as above to simulate an ATM machine.
+Create 10 accounts with id AC001…..AC010 with initial balance 300₹. The
+system prompts the users to enter an id. If the id is entered incorrectly, ask
+the user to enter a correct id. Once an id is accepted, display menu with
+multiple choices.
+1. Balance inquiry
+2. Withdraw money [Maintain minimum balance 300₹]
+3. Deposit money
+4. Money Transfer
+5. Create Account
+6. Deactivate Account
+7. Exit
+Hint: Use ArrayList, which is can shrink and expand with compared to Array. */
+                                       
+import java.util.*;
+
+class P2P3
+{
+    public static void main(String[]args)
+    {
+        ArrayList<Account> AC=new ArrayList<Account>();
+
+        //Creating 10 accounts
+        for(int i=0;i<10;i++)
+        {
+            AC.add(new Account());    
+        }
+
+        int choose=0,flag=0,whereid=0,transferid=0,transferflag=0,deactivate=0,deactivateflag=0,switchflag=0,switchId=0;
+        double WithdrawOrDeposit=0,TransferMoney=0;
+        String id;
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Enter Id : ");
+        id=sc.next();
+
+
+        //System.out.print(AC.get(9).getId());
+       
+        for(Account A:AC)
+        {
+            if(A.getId().equals(id))
+            {
+                flag=1;
+                break;
+            }
+            else
+            {
+                whereid++;
+            }
+        }
+
+        if(flag==1)
+        {
+            while(choose!=7)
+            {
+                System.out.println("\n1. Balance inquiry");
+                System.out.println("2. Withdraw money");
+                System.out.println("3. Deposit money");
+                System.out.println ("4. Money Transfer");
+                System.out.println ("5. Create Account");
+                System.out.println("6. Deactivate Account");
+                System.out.println("7. Exit ");
+                System.out.println("8. Switch Account");
+                System.out.print("Enter : ");
+                choose=sc.nextInt();
+
+                switch(choose)
+                {
+                    case 1:
+                        System.out.println("Balance : "+AC.get(whereid).getBalance());
+                        break;
+                   
+                    case 2:
+                        System.out.println("Enter money to be withdrawn : ");
+                        WithdrawOrDeposit=sc.nextDouble();
+                        AC.get(whereid).withdraw(WithdrawOrDeposit);
+                        break;
+                   
+                    case 3:
+                        System.out.println("Enter money to be deposit : ");
+                        WithdrawOrDeposit=sc.nextDouble();
+                        AC.get(whereid).deposit(WithdrawOrDeposit);
+                        break;
+                   
+                    case 4:
+                        System.out.print("Enter account number to transfer money : ");
+                        id=sc.next();
+                        for(Account A:AC)
+                        {
+                            if(A.getId().equals(id))
+                            {
+                                transferflag=1;
+                                break;
+                            }
+                            else
+                            {
+                                transferid++;
+                            }
+                        }
+                        if(transferflag==1)
+                        {
+                            System.out.print("Enter money to be transfered : ");
+                            TransferMoney=sc.nextDouble();
+                            if(AC.get(whereid).getBalance()-TransferMoney<=300)
+                            {
+                                System.out.println("Insufficient funds to transfer money");
+                            }
+                            else
+                            {
+                                AC.get(transferid).TransferFunds(TransferMoney);
+                                AC.get(whereid).CutTransferredFund(TransferMoney);
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("Incorrect ID to transfer funds! Try Again");
+                        }
+                        break;
+                   
+                    case 5:
+                        AC.add(new Account());
+                        System.out.println("Account created successfully");
+                        break;
+                   
+                    case 6:
+                        System.out.print("Enter account number to be deactivated : ");
+                        id=sc.next();
+                        for(Account A:AC)
+                        {
+                            if(A.getId().equals(id))
+                            {
+                                deactivateflag=1;
+                                break;
+                            }
+                            else
+                            {
+                                deactivate++;
+                            }
+                        }
+                        if(flag==1)
+                        {
+                            AC.remove(deactivate);
+                            System.out.println("Account deactivte successfull");
+                        }
+                        else
+                        {
+                            System.out.println("Account doesnt exist to be deactivated");
+                        }
+                        break;
+                   
+                    case 8:
+                        System.out.print("Enter account to switch : ");
+                        id=sc.next();
+                        for(Account A:AC)
+                            {
+                                if(A.getId().equals(id))
+                                {
+                                    switchflag=1;
+                                    break;
+                                }
+                                else
+                                {
+                                    switchId++;
+                                }
+                            }
+                        if(switchflag==1)
+                        {
+                            whereid=switchId;
+                            System.out.println("ID switch successfull");
+                        }
+                        else
+                        {
+                            System.out.println("Incorrect ID to switch");
+                        }
+
+                }
+            }
+        }
+        else
+        {
+            System.out.println("Incorrect ID! \nTry Again");
+        }
+    }
+}
+
+class Account
+{
+    private String id;
+    private double balance;
+    private double annualInterestRate;
+    private Date dateCreated;
+    private static int totalAccounts;
+
+    Account()
+    {
+        if(totalAccounts<10)
+        {
+            id="AC00"+totalAccounts;
+            balance=300;
+            annualInterestRate=0.07;
+            dateCreated=new Date();
+            totalAccounts++;
+        }
+        else
+        {
+            id="AC0"+totalAccounts;
+            balance=300;
+            annualInterestRate=0.07;
+            dateCreated=new Date();
+            totalAccounts++;
+        }
+    }
+    Account(String id,double balance)
+    {
+        this.id=id;
+        this.balance=balance;
+    }
+    void setId(String id)
+    {
+        this.id=id;
+    }
+    void setBalance(double balance)
+    {
+        this.balance=balance;
+    }
+    void setAnnualInterestRate(double annualInterestRate)
+    {
+        this.annualInterestRate=annualInterestRate;
+    }
+    String getId()
+    {
+        return id;
+    }
+    double getBalance()
+    {
+        return balance;
+    }
+    double getAnnualInterestRate()
+    {
+        return annualInterestRate;
+    }      
+    Date getDateCreated()                              
+    {
+        return dateCreated;
+    }
+    double getMonthlyInterestRate()
+    {
+        return annualInterestRate/12;
+    }
+    double getMonthlyInterest()
+    {
+        return balance*getAnnualInterestRate();
+    }
+    void withdraw(double MoneyWithdrawn)
+    {
+        if(balance-MoneyWithdrawn<=300)
+        {
+            System.out.println("Money cannot be withdraw low balance");
+        }
+        else
+        {
+            balance=balance-MoneyWithdrawn;
+            System.out.println("Money withdrawn successfull");
+        }
+       
+    }
+    void deposit(double MoneyDeposit)
+    {
+        balance=balance+MoneyDeposit;
+        System.out.println("Money deposit successfull");
+    }
+    void getInfo()        //Shows all the information
+    {
+        System.out.println("\nId : "+id);
+        System.out.println("Balance : "+balance);
+        System.out.println("Annual Interest Rate : "+annualInterestRate);
+        System.out.println("Date Created : "+dateCreated);
+        System.out.println("Montly Interest Rate : "+getMonthlyInterestRate());
+        System.out.println("Montly Interest : "+getMonthlyInterest());
+    }
+
+    void TransferFunds(double A)
+    {
+        balance=A+balance;
+        System.out.println("Transfer successfull");
+    }
+
+    void CutTransferredFund(double A)
+    {
+        balance=balance-A;
+    }
+
+    public String toString()
+    {
+        return "\nId : "+id+"\nBalance : "+balance+"\nAnnual Interest Rate : "+annualInterestRate+"\nDate Created : "+dateCreated;
+    }
+}
+4.
+
+ 
+//BY 21CE116 VATSAL RATHOD
+/*Question :
+(Subclasses of Account) In Programming Exercise 2, the Account class was
+defined to model a bank account. An account has the properties account number,
+balance, annual interest rate, and date created, and methods to deposit and
+withdraw funds. Create two subclasses for checking and saving accounts. A
+checking account has an overdraft limit, but a savings account cannot be
+overdrawn. Draw the UML diagram for the classes and then implement them.
+Write a test program that creates objects of Account, SavingsAccount, and
+CheckingAccount and invokes their toString() methods. */
+
+import java.util.*;
+
+class P2P4
+{
+    public static void main(String[]args)
+    {
+        Account A=new Account();
+        SavingsAccount S=new SavingsAccount();
+        CheckingAccount C=new CheckingAccount();
+
+        System.out.println(A);
+        System.out.println(S);
+        System.out.println(C);
+    }
+}
+
+class Account
+{
+    private int id;
+    private double annualInterestRate;
+    private Date dateCreated;
+
+    Account()
+    {
+        id=0;
+        annualInterestRate=0.07;
+        dateCreated=new Date();
+    }
+   
+    public String toString()
+    {
+        return "\nId : "+id+"\nAnnual Interest Rate : "+annualInterestRate+"\nDate Created : "+dateCreated;
+    }
+}
+
+class SavingsAccount extends Account
+{
+    private double SavingsBalance;
+
+    SavingsAccount()
+    {
+        SavingsBalance=500;
+    }
+    void withdraw(double withdrawMoney)
+    {
+        if(SavingsBalance-withdrawMoney<0)
+        {
+            System.out.println("Insufficient Funds");
+        }
+        else
+        {
+            SavingsBalance=SavingsBalance-withdrawMoney;
+            System.out.println("Withdraw Successfull");
+        }
+    }
+    void deposit(double depositMoney)
+    {
+        SavingsBalance=SavingsBalance+depositMoney;
+        System.out.println("Deposit successfull");
+    }
+
+    public String toString()
+    {
+        return "Saving account Balance : "+SavingsBalance;
+    }
+}
+
+class CheckingAccount extends Account
+{
+    private double CheckingsBalance;
+
+    CheckingAccount()
+    {
+        CheckingsBalance=500;
+    }
+
+    void withdraw(double withdrawMoney)
+    {
+        CheckingsBalance=CheckingsBalance-withdrawMoney;
+        System.out.println("Withdraw Successfull");
+    }
+    void deposit(double depositMoney)
+    {
+        CheckingsBalance=CheckingsBalance+depositMoney;
+        System.out.println("Deposit successfull");
+    }
+    public String toString()
+    {
+        return "Checking account Balance : "+CheckingsBalance;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5.
+//BY 21CE116 VATSAL RATHOD
+/*Question :
+Develop a Program that illustrate method overloading concept */
+
+class P2P5
+{
+    public static void main(String[]args)
+    {
+        //Method overloading means same function name but with different arguments
+        Add(2,3);  //Both arguments are integer
+        Add(1.54,2);  //First arguements is double and other integer
+        Add(5.67,23.4);  //Both arguments are double
+    }
+    static void Add(int a,int b)
+    {
+        System.out.println(a+" + "+b+" = "+(a+b));
+    }
+    static void Add(double a,int b)
+    {
+        System.out.println(a+" + "+b+" = "+(a+b));
+    }
+    static void Add(double a,double b)
+    {
+        System.out.println(a+" + "+b+" = "+(a+b));
+    }
+}
+
