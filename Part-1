@@ -1,0 +1,721 @@
+
+Github Link
+
+Codes : 
+
+1.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Introduction to Object Oriented Concepts, comparison of Java with other object
+oriented programming languages. Introduction to JDK, JRE, JVM, javadoc,
+command line argument */
+
+/*Answers :
+JDK : Java Development Kit (in short JDK) is Kit which provides the environment to Develop and execute(run ) the Java program.
+
+JRE : Java Runtime Environment (to say JRE) is an installation package which provides environment to only run(not develop) the java program onto your machine.
+
+JVM : A Java virtual machine (JVM) is a virtual machine that enables a computer to run Java programs as well as programs written
+    in other languages and compiled to Java bytecode
+
+JavaDoc : Javadoc (originally cased JavaDoc) is a documentation generator created by Sun Microsystems for the Java language (now owned by Oracle Corporation)
+    for generating API documentation in HTML format from Java source code
+   
+Command Line Argument : The java command-line argument is an argument i.e. passed at the time of running the java program.
+   The arguments passed from the console can be received in the java program and it can be used as an input  */
+
+
+
+
+2.
+//BY 21CE116 VATSAL RATHOD
+/* QUESTION :
+Given a string, return a string made of the first 2 chars (if present), however include
+first char only if it is 'o' and include the second only if it is 'z', so "ozymandias"
+yields "oz".
+startOz("ozymandias") → "oz"
+startOz("bzoo") → "z"
+startOz("oxx") → "o" */
+
+import java.util.Scanner;
+class P1P2
+{
+    public static void main(String[]args)
+    {
+        String str;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter the string : ");
+        str=sc.next();
+
+        String OZString=startOZ(str);
+        System.out.println("String with OZ : "+ OZString);
+    }
+
+//LOGIC FUNCTION
+    public static String startOZ(String str)
+    {
+        if(str.charAt(0)=='o' || str.charAt(0)=='O')  //Using charAt method access the elements of the string
+        {
+            if(str.charAt(1)=='z' || str.charAt(1)=='Z')
+            {
+                return "oz";       //Returns oz if both present
+            }
+            else
+            {
+                return "o";       //Return only o
+            }
+        }
+        else if(str.charAt(1)=='z' || str.charAt(1)=='Z')
+        {
+           return "z";           //Return only z
+        }
+        else
+        {
+            return "";
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Given two non-negative int values, return true if they have the same last digit, such
+as with 27 and 57. Note that the % "mod" operator computes remainders, so 17 %
+10 is 7.
+lastDigit(7, 17) → true
+lastDigit(6, 17) → false
+lastDigit(3, 113) → true  */
+
+import java.util.*;
+
+class P1P3
+{
+    public static void main(String args[])
+    {
+        int num1,num2;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter number 1 : ");
+        num1=sc.nextInt();
+        System.out.print("Enter number 2 : ");
+        num2=sc.nextInt();
+
+        boolean b=lastDigit(num1,num2);
+        System.out.print(b);
+    }
+
+    public static boolean lastDigit(int num1,int num2)
+    {
+        //Logic
+        if(num1%10 == num2%10)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Given an array of ints, return true if the sequence of numbers 1, 2, 3 appears in the
+array somewhere.
+array123([1, 1, 2, 3, 1]) → true
+array123([1, 1, 2, 4, 1]) → false
+array123([1, 1, 2, 1, 2, 3]) → true */
+
+import java.util.*;
+
+class P1P4
+{
+    public static void main(String args[])
+    {
+        int lenght;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter lenght of the array : ");
+        lenght=sc.nextInt();
+
+        int[] arr=new int[lenght];  
+
+        for(int i=0;i<lenght;i++)
+        {
+            System.out.print("Enter element "+i+" : ");
+            arr[i]=sc.nextInt();
+        }
+
+        boolean b=array123(arr);
+
+        System.out.print(b);
+    }
+
+    public static boolean array123(int[]arr)
+    {
+        int flag=0;
+        for(int i=0;i<(arr.length-2);i++)
+        {
+            if(arr[i]==1 && arr[i+1]==2 && arr[i+2]==3)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Given 2 strings, a and b, return the number of the positions where they contain the
+same length 2 substring. So "xxcaazz" and "xxbaaz" yields 3, since the "xx", "aa",
+and "az" substrings appear in the same place in both strings.
+stringMatch("xxcaazz", "xxbaaz") → 3
+stringMatch("abc", "abc") → 2
+stringMatch("abc", "axc") → 0 */
+
+import java.util.*;
+
+class P1P5
+{
+    public static void main(String args[])
+    {
+        String s1,s2;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter first string : ");
+        s1=sc.next();
+        System.out.print("Enter second string : ");
+        s2=sc.next();
+
+        int match=stringMatch(s1,s2);
+
+        System.out.print("Matches : "+match);
+    }
+
+    public static int stringMatch(String s1,String s2)
+    {
+        int matches=0;
+
+        if(s1.length()>s2.length())
+        {
+            for(int i=0;i<(s2.length()-1);i++)
+            {
+                if(s1.charAt(i)==s2.charAt(i))
+                {
+                    if(s1.charAt(i+1)==s2.charAt(i+1))
+                    {
+                        matches++;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for(int i=0;i<(s1.length()-1);i++)
+            {
+                if(s1.charAt(i)==s2.charAt(i))
+                {
+                    if(s1.charAt(i+1)==s2.charAt(i+1))
+                    {
+                        matches++;
+                    }
+                }
+            }
+        }
+
+        return matches;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+6.
+
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Given an array of strings, return a new array without the strings that are equal to
+the target string. One approach is to count the occurrences of the target string, make
+a new array of the correct length, and then copy over the correct strings.
+wordsWithout(["a", "b", "c", "a"], "a") → ["b", "c"]
+wordsWithout(["a", "b", "c", "a"], "b") → ["a", "c", "a"]
+wordsWithout(["a", "b", "c", "a"], "c") → ["a", "b", "a"] */
+
+import java.util.*;
+
+class P1P6
+{
+    public static void main(String[]args)
+    {
+        int lenght;
+        Scanner sc=new Scanner(System.in);
+
+        System.out.print("Enter lenght array of String : ");
+        lenght=sc.nextInt();
+
+        String[] str=new String[lenght];
+        String targetstr;
+
+        for(int i=0;i<lenght;i++)
+        {
+            System.out.print("Enter element "+ i + " : ");
+            str[i]=sc.next();
+        }
+
+        System.out.print("Enter the target string : ");
+        targetstr=sc.next();
+
+        String[] newStr=wordsWithout(str,targetstr);
+
+        System.out.print("\nString array without the target string : ");
+        for(int i=0;i<newStr.length;i++)
+        {
+            System.out.print(newStr[i]);
+        }
+ 
+    }
+
+    public static String[] wordsWithout(String[] str,String targetstr)
+    {
+        String[] newStr;
+        newStr=new String[2];
+        int j=0;
+
+        for(int i=0;i<str.length;i++)
+        {
+            if(str[i].equals(targetstr))          //Using equals to compare the strings
+            {}
+            else
+            {
+                newStr[j]=str[i];
+                j++;
+            }
+        }
+
+        return newStr;
+    }
+}
+
+
+
+
+
+
+
+
+
+7.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Display numbers in a pyramid pattern.
+                  1
+                1 2 1
+              1 2 4 2 1
+            1 2 4 8 4 2 1
+          1 2 4 8 16 8 4 2 1
+        1 2 4 8 16 32 16 8 4 2 1
+     1 2 4 8 16 32 64 32 16 8 4 2 1
+  1 2 4 8 16 32 64 128 64 32 16 8 4 2 1  */
+
+import java.util.*;
+import java.lang.Math;
+
+class P1P7
+{
+    public static void main(String[]args)
+    {
+        int lines=8;
+        Scanner sc=new Scanner(System.in);
+       
+        System.out.print("Enter number of lines : ");
+        lines=sc.nextInt();
+       
+        for(int i=0;i<lines;i++)
+        {
+            for(int s=i*2-lines;s<lines;s++)
+            {
+                System.out.print(" ");
+            }
+
+            for(int j=0;j<=i;j++)
+            {
+                System.out.print(""+(int)Math.pow(2,j)+" ");            
+            }
+            for(int k=i-1;k>=0;k--)
+            {
+                System.out.print(""+(int)Math.pow(2,k)+" ");
+            }
+           
+            for(int s=i;s<lines;s++)
+            {
+                System.out.print(" ");
+            }
+            System.out.print("\n");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+The problem is to write a program that will grade multiple-choice tests. Assume
+there are eight students and ten questions, and the answers are stored in a two dimensional array. Each row records a student’s answers to the questions, as
+shown in the following array.
+Students’ Answers to the Questions:
+0 1 2 3 4 5 6 7 8 9
+Student 0 A B A C C D E E A D
+Student 1 D B A B C A E E A D
+Student 2 E D D A C B E E A D
+Student 3 C B A E D C E E A D
+Student 4 A B D C C D E E A D
+Student 5 B B E C C D E E A D
+Student 6 B B A C C D E E A D
+Student 7 E B E C C D E E A D
+The key is stored in a one-dimensional array:
+Key to the Questions:
+0 1 2 3 4 5 6 7 8 9
+Key D B D C C D A E A D
+Your program grades the test and displays the result. It compares each student’s
+answers with the key, counts the number of correct answers, and displays it. */
+
+import java.util.*;
+class P1P8
+{
+    public static void main(String[]args)
+    {                                            
+        char[][] StudentAnswers=new char[][]{   {'A', 'B', 'A', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
+                                                {'D', 'B', 'A', 'B', 'C', 'A', 'E', 'E', 'A', 'D'},
+                                                {'E', 'D', 'D', 'A', 'C', 'B', 'E', 'E', 'A', 'D'},
+                                                {'C', 'B', 'A', 'E', 'D', 'C', 'E', 'E', 'A', 'D'},
+                                                {'A', 'B', 'D', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
+                                                {'B', 'B', 'E', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
+                                                {'B', 'B', 'A', 'C', 'C', 'D', 'E', 'E', 'A', 'D'},
+                                                {'E', 'B', 'E', 'C', 'C', 'D', 'E', 'E', 'A', 'D'} };
+
+        char[] Key=new char[] {'D', 'B', 'D', 'C', 'C', 'D', 'A', 'E', 'A', 'D'};
+        int[] CorrectAnswers= new int[]{0,0,0,0,0,0,0,0};
+
+        //Logic to fiind the number of correct answers
+        for(int i=0;i<8;i++)
+        {
+            for(int j=0;j<10;j++)
+            {
+                if(StudentAnswers[i][j]==Key[j])
+                {
+                    CorrectAnswers[i]++;
+                }
+            }
+        }
+
+        //Print the correct answers for each student
+        for(int i=0;i<8;i++)
+        {
+            System.out.println("Student "+ (i+1) + " correct answers : " +CorrectAnswers[i]);
+        }
+   
+    }
+}
+
+
+
+
+9.//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+The problem is to check whether a given Sudoku solution is correct. */
+
+class P1P9
+{
+    public static void main(String[]args)
+    {
+        int[][] SudokuAnswer=new int[][] { {5,3,4,6,7,8,9,1,2},
+                                           {6,7,2,1,9,5,3,4,8},
+                                           {1,9,8,3,4,2,5,6,7},
+                                           {8,5,9,7,6,1,4,2,3},
+                                           {4,2,6,8,5,3,7,9,1},
+                                           {7,1,3,9,2,4,8,5,6},
+                                           {9,6,1,5,3,7,2,8,4},
+                                           {2,8,7,4,1,9,6,3,5},
+                                           {3,4,5,2,8,6,1,7,9} };
+       
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                System.out.print(" "+SudokuAnswer[i][j]);
+
+                if((j+1)%3==0)
+                {
+                    System.out.print("  ");
+                }
+            }
+            System.out.print("\n");
+            if((i+1)%3==0)
+            {
+                System.out.print("\n");
+            }
+        }
+
+        //First Checking all the rows are correct or not by adding all the elements of a row, the sum of elements of all the rows should be 45 as 9+8+..+1=45
+        int[] RowCheck=new int[]{0,0,0,0,0,0,0,0,0};
+
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                RowCheck[i]=SudokuAnswer[i][j]+RowCheck[i];
+            }
+            //System.out.println(RowCheck[i]);
+        }
+
+        //Now Checking all the columns are correct or not by adding all the elements of a columns, the sum of elements of all the rows should be 45 as 9+8+..+1=45
+        int[] ColumnCheck=new int[]{0,0,0,0,0,0,0,0,0};
+
+        for(int i=0;i<9;i++)
+        {
+            for(int j=0;j<9;j++)
+            {
+                ColumnCheck[i]=SudokuAnswer[j][i]+ColumnCheck[i];
+            }
+            //System.out.println(ColumnCheck[i]);
+        }
+
+        //Now if rows and columns all are equal to 45 then sudoku is right
+        for(int i=0;i<9;i++)
+        {
+            if(RowCheck[i]!=45 || ColumnCheck[i]!=45)
+            {
+                System.out.print("Sudoku is wrong");
+                break;
+            }
+            else if((i+1)==9)
+            {
+                System.out.print("Sudoku is right");
+            }  
+        }
+    }
+}
+
+10.
+//BY 21CE116 VATSAL RATHOD
+/*QUESTION :
+Implement Caesar Cipher. */
+
+import java.util.*;
+import java.io.*;
+
+class P1P10
+{  
+   
+    public static void main(String []args)
+    {
+        String str=new String();
+        int key;                          //Key will be 3 for Caeser CIpher
+        Scanner sc=new Scanner(System.in);
+        int choice;
+
+        System.out.print("1.Encrpyt the text\n2.Decrypt the text\nEnter : ");
+        choice=sc.nextInt();
+        if(choice==1)
+        {
+            System.out.print("Enter the text : ");
+            str=sc.next();
+            System.out.print("Enter the key : ");
+            key=sc.nextInt();
+            char[] PlainText=str.toCharArray();  //Converting string to array to access each element of the string
+            CaesarCipherEncrypt(PlainText,key);
+        }
+        else if(choice==2)
+        {
+            System.out.print("Enter the text : ");
+            str=sc.next();
+            System.out.print("Enter the key : ");
+            key=sc.nextInt();
+            char[] PlainText=str.toCharArray();  //Converting string to array to access each element of the string
+            CaesarCipherDecrypt(PlainText,key);
+        }
+    }
+
+    public static void CaesarCipherEncrypt(char[] PlainText,int key)
+    {
+        char[] CaesarCipherText=new char[PlainText.length];
+        char replace;
+        int index;
+        String lower="abcdefghjiklmnopqrstuvwxyz";
+        String upper="ABCDEFGHJIKLMNOPQRSTUVWXYZ";
+
+        for(int i=0;i<PlainText.length;i++)
+        {
+            if(Character.isUpperCase(PlainText[i]))        //If character is upper case
+            {
+                index=upper.indexOf(PlainText[i]);         //Finding the position of our char wth indexOf
+                replace=upper.charAt((key+index) %26);
+                CaesarCipherText[i]=replace;
+               
+            }
+            if(Character.isLowerCase(PlainText[i]))        //If character is lower case
+            {
+                index=lower.indexOf(PlainText[i]);        
+                replace=lower.charAt((key+index) %26);
+                CaesarCipherText[i]=replace;
+       
+            }
+        }
+        System.out.print("Caeser Text : ");
+        for(int i=0;i<PlainText.length;i++)
+        {
+        System.out.print((CaesarCipherText[i]));
+        }
+    }
+
+    public static void CaesarCipherDecrypt(char[] CaesarCipherText,int key)
+    {
+        char[] PlainText=new char[CaesarCipherText.length];
+        char replace;
+        int index;
+        String lower="abcdefghjiklmnopqrstuvwxyz";
+        String upper="ABCDEFGHJIKLMNOPQRSTUVWXYZ";
+
+        for(int i=0;i<CaesarCipherText.length;i++)
+        {
+            if(Character.isUpperCase(CaesarCipherText[i]))        
+            {
+                index=upper.indexOf(CaesarCipherText[i]);        
+                replace=upper.charAt((-key+index) %26);
+                PlainText[i]=replace;
+               
+            }
+            if(Character.isLowerCase(CaesarCipherText[i]))      
+            {
+                index=lower.indexOf(CaesarCipherText[i]);        
+                replace=lower.charAt((-key+index) %26);
+                PlainText[i]=replace;
+       
+            }
+        }
+        System.out.print("Caeser Text : ");
+        for(int i=0;i<CaesarCipherText.length;i++)
+        {
+        System.out.print((PlainText[i]));
+        }
+    }
+}
+
